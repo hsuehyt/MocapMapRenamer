@@ -19,17 +19,11 @@ Ideal for converting naming conventions (e.g., from **AdvancedSkeleton** to **Pl
 
 ---
 
-## 📂 Folder Structure
+## ⬇️ Download
+You can clone this repository using:  
+```bash
+git clone https://github.com/hsuehyt/MocapMapRenamer.git
 ```
-MocapMapRenamer/
-│
-├─ moCapMatchers/         # Contains .txt files for different skeleton systems
-├─ images/                # Screenshots and documentation images
-├─ Mocap Map Renamer.py   # Main Python script for Maya
-├─ LICENSE
-└─ README.md
-```
-
 ---
 
 ## ⚙️ How to Use
@@ -39,7 +33,6 @@ MocapMapRenamer/
    - Set the `moCapMatchers` directory  
    - Select the **Target Bone System**  
    - Click `Apply Rename` to convert bone names in your scene.
-
 ---
 
 ## 📜 License
