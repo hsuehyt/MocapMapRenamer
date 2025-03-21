@@ -63,7 +63,7 @@ def rename_bones(name_matchers_folder, original_system='AdvancedSkeleton', targe
             cmds.rename(joint, new_name)
 
 def show_ui():
-    default_dir = r'C:/Users/hsueh/Documents/maya/scripts/AdvancedSkeleton/AdvancedSkeletonFiles/moCapMatchers'
+    default_dir = os.path.join(cmds.workspace(q=True, rootDirectory=True), 'moCapMatchers')
 
     if cmds.window('renameBonesUI', exists=True):
         cmds.deleteUI('renameBonesUI')
