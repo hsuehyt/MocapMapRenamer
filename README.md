@@ -42,17 +42,5 @@ MocapMapRenamer/
 
 ---
 
-## 📝 Creating Custom Mapping Files
-- Each `.txt` file inside `moCapMatchers` should contain key-value pairs like:
-```
-sideRight = R
-sideLeft = L
-Hips = Pelvis
-Spine1 = SpineMid
-```
-- These determine how each bone will be renamed.
-
----
-
 ## 📜 License
 This project is licensed under the MIT License.
