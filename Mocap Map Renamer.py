@@ -68,7 +68,7 @@ def show_ui():
     if cmds.window('renameBonesUI', exists=True):
         cmds.deleteUI('renameBonesUI')
 
-    window = cmds.window('renameBonesUI', title='Mocap Map Renamer', width=300, height=200)
+    window = cmds.window('renameBonesUI', title='Mocap Map Renamer', width=400, height=300)
     
     # Main form layout
     form = cmds.formLayout(numberOfDivisions=100)
@@ -121,7 +121,7 @@ def show_ui():
         cmds.optionMenu('targetMenu', e=True, v='Plask')
 
     cmds.showWindow(window)
-    cmds.window(window, edit=True, width=300, height=200)
+    cmds.window(window, edit=True, width=400, height=300)
 
 def browse_folder(folder_path_field):
     folder = cmds.fileDialog2(fileMode=3, caption='Select nameMatchers folder')
