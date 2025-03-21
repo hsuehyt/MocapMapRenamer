@@ -14,6 +14,7 @@ Ideal for converting naming conventions (e.g., from **AdvancedSkeleton** to **Pl
 - UI integrated directly in Maya's Script Editor
 - Browse and select your `moCapMatchers` folder
 - Load available bone systems from `.txt` files
+- Select original character skeleton system to be rename
 - Select target system for renaming  
 - Apply batch renaming easily to all joint nodes in the scene  
 
@@ -27,10 +28,11 @@ git clone https://github.com/hsuehyt/MocapMapRenamer.git
 ---
 
 ## ⚙️ How to Use
-1. Place the `Mocap Map Renamer.py` and `moCapMatchers` folder in your Maya scripts directory or source them from any location.
+1. Clone this repository in your Maya project directory or source it from any location.
 2. Run the script in Maya's Script Editor (Python tab).
 3. The UI will pop up, allowing you to:
-   - Set the `moCapMatchers` directory  
+   - Set the `moCapMatchers` directory
+   - Select the **Original Bone System**
    - Select the **Target Bone System**  
    - Click `Apply Rename` to convert bone names in your scene.
 ---
