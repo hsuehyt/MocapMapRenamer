@@ -44,23 +44,57 @@ def rename_bones(name_matchers_folder, original_system='AdvancedSkeleton', targe
     all_joints = cmds.ls(type='joint')
 
     for joint in all_joints:
-        new_name = joint
+        # Determine the side and base name
+        side = None
+        base_name = joint
+        
+        # Check for side prefix (original system has side before name)
+        if orig_before:
+            if joint.startswith(f'{orig_r}_'):
+                side = tgt_r
+                base_name = joint[len(orig_r)+1:]
+            elif joint.startswith(f'{orig_l}_'):
+                side = tgt_l
+                base_name = joint[len(orig_l)+1:]
+            elif orig_m and joint.startswith(f'{orig_m}_'):
+                side = tgt_m
+                base_name = joint[len(orig_m)+1:]
+        # Check for side suffix (original system has side after name)
+        else:
+            if joint.endswith(f'_{orig_r}'):
+                side = tgt_r
+                base_name = joint[:-len(orig_r)-1]
+            elif joint.endswith(f'_{orig_l}'):
+                side = tgt_l
+                base_name = joint[:-len(orig_l)-1]
+            elif orig_m and joint.endswith(f'_{orig_m}'):
+                side = tgt_m
+                base_name = joint[:-len(orig_m)-1]
+
+        # Apply base name mapping
+        mapped_name = base_name
         for key, value in orig_map.items():
-            if key in joint:
-                replacement = tgt_map.get(key, key)
-                if orig_before:
-                    new_name = new_name.replace(f'{orig_r}_{key}', f'{tgt_r}_' + replacement if tgt_us else f'{tgt_r}{replacement}')
-                    new_name = new_name.replace(f'{orig_l}_{key}', f'{tgt_l}_' + replacement if tgt_us else f'{tgt_l}{replacement}')
-                    if orig_m:
-                        new_name = new_name.replace(f'{orig_m}_{key}', f'{tgt_m}_' + replacement if tgt_us else f'{tgt_m}{replacement}')
-                else:
-                    new_name = new_name.replace(f'{key}_{orig_r}', replacement + f'_{tgt_r}' if tgt_us else f'{replacement}{tgt_r}')
-                    new_name = new_name.replace(f'{key}_{orig_l}', replacement + f'_{tgt_l}' if tgt_us else f'{replacement}{tgt_l}')
-                    if orig_m:
-                        new_name = new_name.replace(f'{key}_{orig_m}', replacement + f'_{tgt_m}' if tgt_us else f'{replacement}{tgt_m}')
+            if key in mapped_name:
+                mapped_name = mapped_name.replace(key, tgt_map.get(key, key))
+
+        # Apply side according to target system rules
+        if side:
+            if tgt_before:
+                # Side at beginning
+                separator = '_' if tgt_us else ''
+                new_name = f"{side}{separator}{mapped_name}"
+            else:
+                # Side at end
+                separator = '_' if tgt_us else ''
+                new_name = f"{mapped_name}{separator}{side}"
+        else:
+            new_name = mapped_name
 
         if new_name != joint:
-            cmds.rename(joint, new_name)
+            try:
+                cmds.rename(joint, new_name)
+            except:
+                cmds.warning(f'Could not rename {joint} to {new_name}')
 
 def show_ui():
     default_dir = os.path.join(cmds.workspace(q=True, rootDirectory=True), 'MocapMapRenamer', 'moCapMatchers')
