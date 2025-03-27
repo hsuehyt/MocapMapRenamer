@@ -5,7 +5,8 @@ sideBeforeName=1
 sideUnderScore=0
 
 Root=hips
-Spine1=spine1
+Spine1=spine
+Spine2=spine1
 Chest=spine2
 Scapula=Shoulder
 Shoulder=Arm
